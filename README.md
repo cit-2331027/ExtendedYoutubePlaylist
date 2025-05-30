@@ -1,5 +1,7 @@
 # ExtendedYoutubePlaylist
 
+## ※このリポジトリは就職活動用に公開しており、Pull Request・Issueの受付は行っておりません。
+
 　このアプリケーションを実行するにはjava-sdkが必要です。javafx-sdk-23.0.2で動作することを確認済みです。ダウンロードが完了したらターミナルからカレントディレクトリをこのフォルダまで移動させ、以下のコマンドを実行してください。なお、/path/to/your/java-sdkはJavaFX SDKのパスを、{output-folder-name}にはコンパイル先のフォルダの名前を指定してください。
 
 ```bash
