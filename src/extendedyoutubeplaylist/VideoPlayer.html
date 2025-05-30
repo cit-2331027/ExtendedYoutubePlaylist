@@ -1,0 +1,51 @@
+<body style="text-align:center">
+	<div id="player"></div>
+	<script>
+	var tag = document.createElement('script');
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	
+	var isLooping = false;
+	function setIsLooping(_isLooping) {
+		isLooping = _isLooping;
+	}
+	var player;
+	var isYouTubeIframeAPIReady = false;
+	function onYouTubeIframeAPIReady() {
+		player = new YT.Player('player');
+		isYouTubeIframeAPIReady = true;
+	}
+	function getIsYouTubeIframeAPIReady() {
+		return isYouTubeIframeAPIReady;
+	}
+	
+	function onPlayerReady() {
+		callback.onVideoLoaded();
+	}
+	function onPlayerStateChange(event) {
+		if (event.target.getPlayerState() == YT.PlayerState.ENDED) {
+			if (isLooping) skipStart(true);
+			else callback.setCurrentVideoToNextVideo();
+		}
+	}
+	function setVideo(videoId, width, height) {
+		player.setSize(width, height);
+		player.cueVideoById(videoId, 0);
+	}
+	function skipStart(isPlaying) {
+		if (isPlaying) player.loadVideoById(player.getVideoData().video_id, 0);
+		else player.cueVideoById(player.getVideoData().video_id, 0);
+	}
+	function playVideo() {
+		player.playVideo();
+	}
+	function pauseVideo() {
+		player.pauseVideo();
+	}
+	function skipEnd(isPlaying) {
+		if (isPlaying) player.loadVideoById(player.getVideoData().video_id, player.getDuration());
+		else player.cueVideoById(player.getVideoData().video_id, player.getDuration());
+	}
+	</script>
+</body>
