@@ -197,7 +197,7 @@ public class VideoPlayer {
 		this.videoMap.add(pair);
 	}
 	public void setCurrentVideo(VideoItem video) {
-		this.webView.getEngine().executeScript("setVideo('" + video.getVideoId() + "', " + this.videoWidth + ", " + this.videoHeight + ");");
+		this.webView.getEngine().executeScript("setVideo('" + video.getVideoId() + "', " + this.videoWidth + ", " + this.videoHeight + "," + this.isPlaying +  ");");
 		this.currentVideo = video;
 		
 		int index = 0;

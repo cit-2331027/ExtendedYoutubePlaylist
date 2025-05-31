@@ -13,7 +13,9 @@
 	var player;
 	var isYouTubeIframeAPIReady = false;
 	function onYouTubeIframeAPIReady() {
-		player = new YT.Player('player');
+		player = new YT.Player('player', {events: {
+		        'onStateChange': onPlayerStateChange
+		      }});
 		isYouTubeIframeAPIReady = true;
 	}
 	function getIsYouTubeIframeAPIReady() {
@@ -26,12 +28,15 @@
 	function onPlayerStateChange(event) {
 		if (event.target.getPlayerState() == YT.PlayerState.ENDED) {
 			if (isLooping) skipStart(true);
-			else callback.setCurrentVideoToNextVideo();
+			else {
+				callback.setCurrentVideoToNextVideo();
+			}
 		}
 	}
-	function setVideo(videoId, width, height) {
+	function setVideo(videoId, width, height, isPlaying) {
 		player.setSize(width, height);
-		player.cueVideoById(videoId, 0);
+		if (isPlaying) player.loadVideoById(videoId, 0);
+		else player.cueVideoById(videoId, 0);
 	}
 	function skipStart(isPlaying) {
 		if (isPlaying) player.loadVideoById(player.getVideoData().video_id, 0);
