@@ -2,9 +2,10 @@ package extendedyoutubeplaylist;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -345,9 +346,9 @@ public class Main extends Application {
 		ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
 		File file = new File("data.json");
 		try {
-			FileWriter fileWriter = new FileWriter(file);
-			fileWriter.write(mapper.writeValueAsString(this.rootFolder.getObjectNode(mapper)));
-			fileWriter.close();
+			OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
+			writer.write(mapper.writeValueAsString(this.rootFolder.getObjectNode(mapper)));
+			writer.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
