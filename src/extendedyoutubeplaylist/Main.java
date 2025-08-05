@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -189,7 +190,7 @@ public class Main extends Application {
 						connection.connect();
 						int responseCode = connection.getResponseCode();
 						if (responseCode == HttpURLConnection.HTTP_OK) {
-							BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+							BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
 				            String inputLine;
 				            StringBuilder htmlContent = new StringBuilder();
 
